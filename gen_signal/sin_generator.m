@@ -1,4 +1,4 @@
-function sin_table = generate_lookup_sine(out_file_name, fnd_freq, nSamples, fnd_amp, init_phase, use_plot)
+function [sin_table, t] = generate_lookup_sine(out_file_name, fnd_freq, nSamples, fnd_amp, init_phase, use_plot)
 % ##############################################################################
 % This function generates sin_table for C lang
 %
@@ -16,7 +16,7 @@ function sin_table = generate_lookup_sine(out_file_name, fnd_freq, nSamples, fnd
   
   % set defualt parameters
   if nargin < 6,
-    use_plot = 'True'
+    use_plot = 'True';
   end
   if nargin < 5,
     init_phase = 0;
@@ -29,7 +29,7 @@ function sin_table = generate_lookup_sine(out_file_name, fnd_freq, nSamples, fnd
   t = 0 : T/nSamples : T - T/nSamples;
   sin_table = round(1000*fnd_amp*sin(2*pi*fnd_freq*t + init_phase));
   
-  if use_plot == 'True',
+  if strcmp(use_plot, "True"),
     plot(t, sin_table);
   end
   
