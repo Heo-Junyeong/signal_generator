@@ -1,2 +1,2 @@
 # signal_generator
-Various signal generators. (e.g., Junghyun, square, etc.) Code for DSP.
+Various signal generators. (e.g., sinusoid, square, etc.) Code for DSP.
