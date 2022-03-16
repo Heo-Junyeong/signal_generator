@@ -77,6 +77,6 @@ function [sin_signal, t] = make_sin_harmonics_to_wav(fnd_freq, len, sampling_rat
 end
 
 %% test main
-for i = 20:200,
-  make_sin_harmonics_to_wav(i, 10, 4000, 'wav/ref2/');
+for i = 1:20,
+  make_sin_harmonics_to_wav(i, 10, 4000);
 end

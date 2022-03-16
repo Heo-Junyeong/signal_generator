@@ -61,6 +61,6 @@ function y = debug_figure,
   figure('position',[1980, 200, 800, 500]);
 end
 
-[aa, bb, t] = make_sin_cos_iir(5, 2, 4000, 1, "True");
+[aa, bb, t] = make_sin_cos_iir(100, 2, 4000, 1, "True");
 %% aa=cos, bb= sin
 disp(aa*bb');

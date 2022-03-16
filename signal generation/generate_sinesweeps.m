@@ -1,4 +1,6 @@
-function sdbl = generate_sinesweeps(f1,f2,fs,N)
+start = 1;
+
+function sdb1 = generate_sinesweeps(f1,f2,fs, N, iter)
 % sdbl = generate_sinesweeps(f1,f2,fs,N)
 %
 % f1:      starting frequency [Hz]
@@ -23,20 +25,25 @@ function sdbl = generate_sinesweeps(f1,f2,fs,N)
 %
 % e.g. generate_sinesweeps(20,20000,44100,17);
 
+  T = (2^N)/fs;
 
-
-T = (2^N)/fs;
-
-% Create the swept sine tone
-w1 = 2*pi*f1;
-w2 = 2*pi*f2;
-K = T*w1/log(w2/w1);
-L = T/log(w2/w1);
-t = linspace(0,T-1/fs,fs*T);
-s = sin(K*(exp(t/L) - 1));
-
-% Double the length so that it is easy to use cyclical (de)convolution
-sdbl = [s s s s];
-
+  % Create the swept sine tone
+  w1 = 2*pi*f1;
+  w2 = 2*pi*f2;
+  K = T*w1/log(w2/w1);
+  L = T/log(w2/w1);
+  t = linspace(0,T-1/fs,fs*T);
+  s = sin(K*(exp(t/L) - 1));
+  
+  sdb1 = zeros(1);
+  % Double the length so that it is easy to use cyclical (de)convolution
+  for n = 1 : iter,
+    sdb1 = [sdb1, s];
+  end
 % Scaling by 0.9999 suppresses a warning message about clipping.
-audiowrite('sinesweeps.wav',sdbl*0.9999,fs);
+  audiowrite('sinesweeps.wav', sdb1 * 0.9999, fs);
+  
+end
+
+sdb1 = generate_sinesweeps(20, 8000, 16000, 17, 1);
+specgram(sdb1);
